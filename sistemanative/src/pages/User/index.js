@@ -9,6 +9,7 @@ import {
   Avatar,
   Name,
   Bio,
+  Loading,
   Stars,
   Starred,
   OwnerAvatar,
@@ -30,20 +31,45 @@ export default class User extends Component {
 
   state = {
     stars: [],
+    page: 1,
+    loading: true,
+    refreshing: false,
   }
 
   async componentDidMount() {
+    this.load()
+  }
+
+  load = async (page = 1) => {
+    const { stars } = this.state
     const { navigation } = this.props
     const user = navigation.getParam('user')
 
-    const response = await api.get(`/users/${user.login}/starred`)
+    const response = await api.get(`/users/${user.login}/starred`, {
+      params: { page },
+    })
 
-    this.setState({ stars: response.data })
+    this.setState({
+      stars: page >= 2 ? [...stars, ...response.data] : response.data,
+      page,
+      loading: false,
+      refreshing: false,
+    })
+  }
+
+  loadMore = () => {
+    const { page } = this.state
+    const nextPage = page + 1
+    this.load(nextPage)
+  }
+
+  refreshList = () => {
+    this.setState({ refreshing: true, stars: [] }, this.load)
   }
 
   render() {
     const { navigation } = this.props
-    const { stars } = this.state
+    const { stars, loading, refreshing } = this.state
 
     const user = navigation.getParam('user')
 
@@ -55,19 +81,27 @@ export default class User extends Component {
           <Bio>{user.bio}</Bio>
         </Header>
 
-        <Stars
-          data={stars}
-          keyExtractor={star => String(star.id)}
-          renderItem={({ item }) => (
-            <Starred>
-              <OwnerAvatar source={{ uri: item.owner.avatar_url }} />
-              <Info>
-                <Title>{item.name}</Title>
-                <Author>{item.owner.login}</Author>
-              </Info>
-            </Starred>
-          )}
-        />
+        {loading ? (
+          <Loading />
+        ) : (
+          <Stars
+            data={stars}
+            onRefresh={this.refreshList}
+            refreshing={refreshing}
+            onEndReachedThreshold={0.2}
+            onEndReached={this.loadMore}
+            keyExtractor={star => String(star.id)}
+            renderItem={({ item }) => (
+              <Starred>
+                <OwnerAvatar source={{ uri: item.owner.avatar_url }} />
+                <Info>
+                  <Title>{item.name}</Title>
+                  <Author>{item.owner.login}</Author>
+                </Info>
+              </Starred>
+            )}
+          />
+        )}
       </Container>
     )
   }
