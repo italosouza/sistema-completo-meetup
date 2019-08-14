@@ -26,6 +26,17 @@ module.exports = {
         extensions: ['.jsx', '.js']
       }
     ],
-    'import/prefer-default-export': 'off'
+    'import/prefer-default-export': 'off',
+    'react/static-property-placement': [
+      'warn',
+      'property assignment',
+      {
+        childContextTypes: 'static getter',
+        contextTypes: 'static public field',
+        contextType: 'static public field',
+        displayName: 'static public field',
+        propTypes: 'static public field'
+      }
+    ]
   }
 }
