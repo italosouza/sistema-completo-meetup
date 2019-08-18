@@ -52,7 +52,6 @@ export function* signUp({ payload }) {
 export function setToken({ payload }) {
   if (!payload) return
 
-  console.tron.log('token rehidratado', payload)
   const { token } = payload.auth
   if (token) {
     api.defaults.headers.Authorization = `Bearer ${token}`
