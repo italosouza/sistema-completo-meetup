@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom'
 import { Form, Input } from '@rocketseat/unform'
 import * as Yup from 'yup'
 
+import { useDispatch, useSelector } from 'react-redux'
+import { signUpRequest } from '~/store/modules/auth/actions'
+
 import logo from '~/assets/images/logo.svg'
 
 const schema = Yup.object().shape({
@@ -16,7 +19,12 @@ const schema = Yup.object().shape({
 })
 
 export default function SignUp() {
-  function handleSubmit(data) {}
+  const dispatch = useDispatch()
+  const loading = useSelector(state => state.auth.loading)
+
+  function handleSubmit({ name, email, password }) {
+    dispatch(signUpRequest(name, email, password))
+  }
 
   return (
     <>
@@ -27,7 +35,7 @@ export default function SignUp() {
         <Input name='email' type='email' placeholder='E-mail' />
         <Input name='password' type='password' placeholder='Senha' />
 
-        <button type='submit'>Criar conta</button>
+        <button type='submit'>{loading ? 'Criando...' : 'Criar conta'}</button>
         <Link to='/'>Já tenho login</Link>
       </Form>
     </>
