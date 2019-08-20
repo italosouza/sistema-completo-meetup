@@ -6,10 +6,15 @@ import { Container } from './styles'
 import { updateProfileRequest } from '~/store/modules/user/actions'
 
 import AvatarInput from './AvatarInput'
+import { signOutRequest } from '~/store/modules/auth/actions'
 
 export default function Profile() {
   const dispatch = useDispatch()
   const profile = useSelector(state => state.user.profile)
+
+  function handleSignOut() {
+    dispatch(signOutRequest())
+  }
 
   function handleSubmit(data) {
     dispatch(updateProfileRequest(data))
@@ -39,7 +44,9 @@ export default function Profile() {
         <button type='submit'>Atualizar perfil</button>
       </Form>
 
-      <button type='button'>Sair do sistema</button>
+      <button type='button' onClick={handleSignOut}>
+        Sair do sistema
+      </button>
     </Container>
   )
 }
