@@ -3,6 +3,7 @@ import { Op } from 'sequelize'
 import { isBefore, startOfDay, endOfDay, parseISO } from 'date-fns'
 import Meetup from '../models/Meetup'
 import User from '../models/User'
+import File from '../models/File'
 
 class MeetupController {
   async index(req, res) {
@@ -19,9 +20,28 @@ class MeetupController {
 
     const meetups = await Meetup.findAll({
       where,
-      include: [User],
+      include: [
+        {
+          model: User,
+          attributes: ['id', 'name', 'email'],
+        },
+      ],
       limit: 10,
       offset: 10 * page - 10,
+    })
+
+    return res.json(meetups)
+  }
+
+  async show(req, res) {
+    const { id } = req.params
+    const meetups = await Meetup.findByPk(id, {
+      include: [
+        {
+          model: File,
+          attributes: ['url', 'path', 'name'],
+        },
+      ],
     })
 
     return res.json(meetups)
@@ -37,7 +57,7 @@ class MeetupController {
     })
 
     if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Validation fails' })
+      return res.status(400).json({ error: 'Validation failed' })
     }
 
     if (isBefore(parseISO(req.body.date), new Date())) {
@@ -64,7 +84,7 @@ class MeetupController {
     })
 
     if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Validation fails' })
+      return res.status(400).json({ error: 'Validation failed' })
     }
 
     const user_id = req.userId

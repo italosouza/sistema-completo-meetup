@@ -1,7 +1,8 @@
 import styled from 'styled-components'
+import { darken } from 'polished'
 
 export const Container = styled.div`
-  max-width: 600px;
+  max-width: 900px;
   margin: 50px auto;
 
   display: flex;
@@ -9,46 +10,59 @@ export const Container = styled.div`
 
   header {
     display: flex;
-    align-self: center;
+    justify-content: space-between;
     align-items: center;
 
     button {
+      padding: 0 20px;
+      height: 44px;
+      background: #f64c75;
+      font-weight: bold;
+      color: #fff;
       border: 0;
-      background: none;
+      border-radius: 4px;
+      font-size: 16px;
+      transition: background 0.2s;
+
+      &:hover {
+        background: ${darken(0.08, '#f64c75')};
+      }
     }
 
     strong {
       color: #fff;
-      font-size: 24px;
+      font-size: 32px;
       margin: 0 15px;
     }
   }
 
   ul {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 15px;
-    margin-top: 30px;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 10px;
+    margin-top: 70px;
   }
 `
 
 export const Time = styled.li`
-  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 30px;
   border-radius: 4px;
-  background: #fff;
+  background: rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 
   opacity: ${props => (props.past ? 0.5 : 1)};
 
   strong {
-    display: block;
-    color: ${props => (props.available ? '#999' : '#7159c1')};
-    font-size: 20px;
-    font-weight: normal;
+    color: #fff;
+    font-size: 18px;
+    line-height: 21px;
+    font-weight: bold;
   }
 
   span {
-    display: block;
     margin-top: 3px;
-    color: ${props => (props.available ? '#999' : '#666')};
+    color: rgba(255, 255, 255, 0.6);
   }
 `

@@ -27,11 +27,15 @@ export default function SignIn() {
       <img src={logo} alt='Logo' />
 
       <Form schema={schema} onSubmit={handleSubmit}>
-        <Input name='email' type='email' placeholder='E-mail' />
-        <Input name='password' type='password' placeholder='Senha' />
+        <Input name='email' type='email' placeholder='Digite seu e-mail' />
+        <Input
+          name='password'
+          type='password'
+          placeholder='Sua senha secreta'
+        />
 
         <button type='submit'>{loading ? 'Carregando...' : 'Entrar'}</button>
-        <Link to='/register'>Criar nova conta</Link>
+        <Link to='/register'>Criar conta grátis</Link>
       </Form>
     </>
   )
