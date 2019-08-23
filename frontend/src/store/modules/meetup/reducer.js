@@ -8,14 +8,13 @@ const INITIAL_STATE = {
 export default function meetup(state = INITIAL_STATE, action) {
   return produce(state, draft => {
     switch (action.type) {
-      case '@meetup/MEETUP_DETAIL_REQUEST': {
+      case '@meetup/MEETUP_EDIT_REQUEST': {
         draft.meetup = action.payload.data
         draft.loading = true
         break
       }
 
-      case '@meetup/MEETUP_DETAIL_SUCCESS': {
-        draft.meetup = action.payload.data
+      case '@meetup/MEETUP_EDIT_SUCCESS': {
         draft.loading = false
         break
       }

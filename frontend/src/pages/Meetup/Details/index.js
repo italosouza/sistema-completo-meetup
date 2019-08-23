@@ -19,7 +19,7 @@ export default function Details({ match }) {
         ...response.data,
         timeFormatted: formatDate(response.data.date, "d 'de' MMMM, 'às' H'h'"),
       }
-      console.tron.log(data.File.url)
+
       setMeetup(data)
     }
 

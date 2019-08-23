@@ -1,13 +1,13 @@
-export function meetupDetailRequest() {
+export function meetupEditRequest(data) {
   return {
-    type: '@meetup/MEETUP_DETAIL_REQUEST',
+    type: '@meetup/MEETUP_EDIT_REQUEST',
+    payload: { data },
   }
 }
 
-export function meetupDetailSuccess(data) {
+export function meetupEditSuccess() {
   return {
-    type: '@meetup/MEETUP_DETAIL_SUCCESS',
-    payload: { data },
+    type: '@meetup/MEETUP_EDIT_SUCCESS',
   }
 }
 
