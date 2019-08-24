@@ -12,17 +12,16 @@ import { meetupEditRequest } from '~/store/modules/meetup/actions'
 export default function New({ match }) {
   const dispatch = useDispatch()
 
-  const { id } = match
+  const { id } = match.params
   const [meetup, setMeetup] = useState({})
 
   useEffect(() => {
     async function loadMeetup() {
-      const response = await api.get(`/meetup/${id}`)
+      const response = await api.get(`/meetups/${id}`)
       const data = {
         ...response.data,
         timeFormatted: formatDate(response.data.date, "d 'de' MMMM, 'às' H'h'"),
       }
-
       setMeetup(data)
     }
 
@@ -58,12 +57,16 @@ export default function New({ match }) {
 
 New.defaultProps = {
   match: {
-    id: null,
+    params: {
+      id: null,
+    },
   },
 }
 
 New.propTypes = {
   match: PropTypes.shape({
-    id: PropTypes.number,
+    params: PropTypes.shape({
+      id: PropTypes.number,
+    }),
   }),
 }
