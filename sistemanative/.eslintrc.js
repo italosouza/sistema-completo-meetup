@@ -37,6 +37,7 @@ module.exports = {
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
     camelcase: 'off',
+    'react/jsx-props-no-spreading': 'off',
 
     'import/prefer-default-export': 'off',
     'react/static-property-placement': [
