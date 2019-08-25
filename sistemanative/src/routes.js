@@ -1,13 +1,13 @@
-import { createAppContainer, createStackNavigator } from 'react-navigation'
+import { createAppContainer, createSwitchNavigator } from 'react-navigation'
 
-import Main from './pages/Main'
-import User from './pages/User'
+import SignIn from './pages/SignIn'
+import SignUp from './pages/SignUp'
 
 const Routes = createAppContainer(
-  createStackNavigator(
+  createSwitchNavigator(
     {
-      Main,
-      User,
+      SignIn,
+      SignUp,
     },
     {
       headerLayoutPreset: 'center',
