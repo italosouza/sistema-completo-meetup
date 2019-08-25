@@ -1,5 +1,6 @@
 import React, { useRef } from 'react'
 
+import PropTypes from 'prop-types'
 import { Image } from 'react-native'
 
 import Background from '~/components/Background'
@@ -65,4 +66,10 @@ export default function SignUp({ navigation }) {
       </Container>
     </Background>
   )
+}
+
+SignUp.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func,
+  }).isRequired,
 }

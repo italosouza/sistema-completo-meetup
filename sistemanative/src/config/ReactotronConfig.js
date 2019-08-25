@@ -3,7 +3,9 @@ import { reactotronRedux } from 'reactotron-redux'
 import reactotronSaga from 'reactotron-redux-saga'
 
 if (__DEV__) {
-  const tron = Reactotron.configure()
+  const tron = Reactotron.configure({
+    name: 'MeetApp',
+  })
     .use(reactotronRedux())
     .use(reactotronSaga())
     .connect()
