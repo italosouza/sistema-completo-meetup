@@ -32,8 +32,8 @@ export default (isSigned = false) =>
         ),
         App: createBottomTabNavigator(
           {
-            Dashboard,
             Profile,
+            Dashboard,
           },
           {
             tabBarOptions: {
