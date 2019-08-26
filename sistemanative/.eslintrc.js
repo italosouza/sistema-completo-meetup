@@ -38,6 +38,7 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'warn',
     camelcase: 'off',
     'react/jsx-props-no-spreading': 'off',
+    'no-unneeded-ternary': 'error',
 
     'import/prefer-default-export': 'off',
     'react/static-property-placement': [

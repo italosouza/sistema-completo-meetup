@@ -1,5 +1,6 @@
 import React from 'react'
 
+import PropTypes from 'prop-types'
 import { View } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
@@ -15,9 +16,15 @@ export default function Profile() {
   )
 }
 
+function barIcon({ tintColor }) {
+  return <Icon name='person' size={20} color={tintColor} />
+}
+
+barIcon.propTypes = {
+  tintColor: PropTypes.string.isRequired,
+}
+
 Profile.navigationOptions = {
-  tabBarLabel: 'Meu Perfil',
-  tabBarIcon: ({ tintColor }) => (
-    <Icon name='person' size={20} color={tintColor} />
-  ),
+  tabBarLabel: 'Agendamentos',
+  tabBarIcon: barIcon,
 }
