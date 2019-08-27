@@ -48,7 +48,7 @@ Appointment.propTypes = {
     }),
     date: PropTypes.string,
     past: PropTypes.bool,
-    canceled_at: PropTypes.bool,
+    canceled_at: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   }).isRequired,
   onCancel: PropTypes.func.isRequired,
 }
