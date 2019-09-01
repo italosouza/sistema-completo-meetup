@@ -26,11 +26,15 @@ export const FormInput = styled(Input)`
 `
 export const SubmitButton = styled(Button)`
   margin-top: 5px;
+  height: 50px;
 `
 
 export const LogoutButton = styled(Button)`
-  margin-top: 10px;
-  background: #f64c75;
+  margin-top: 15px;
+  background: #d44059;
+  height: 42px;
+  font-size: 16px;
+  line-height: 19px;
 `
 export const SignLink = styled.TouchableOpacity`
   margin-top: 20px;
@@ -42,6 +46,6 @@ export const SignLinkText = styled.Text`
 `
 export const Separator = styled.View`
   height: 1px;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
   margin: 20px 0 30px;
 `

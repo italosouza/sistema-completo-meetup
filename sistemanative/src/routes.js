@@ -1,22 +1,14 @@
-import React from 'react'
-
 import {
   createAppContainer,
   createSwitchNavigator,
   createBottomTabNavigator,
-  createStackNavigator,
 } from 'react-navigation'
-
-import Icon from 'react-native-vector-icons/MaterialIcons'
 
 import SignIn from './pages/SignIn'
 import SignUp from './pages/SignUp'
 
-import SelectProvider from '~/pages/New/SelectProvider'
-import SelectDateTime from '~/pages/New/SelectDateTime'
-import Confirm from '~/pages/New/Confirm'
-
 import Dashboard from './pages/Dashboard'
+import Subscriptions from './pages/Subscriptions'
 import Profile from './pages/Profile'
 
 export default (isSigned = false) =>
@@ -33,7 +25,7 @@ export default (isSigned = false) =>
             headerBackTitleVisible: false,
             defaultNavigationOptions: {
               headerStyle: {
-                backgroundColor: '#7159c1',
+                backgroundColor: '#2B1A2F',
               },
               headerTintColor: '#FFF',
             },
@@ -42,35 +34,7 @@ export default (isSigned = false) =>
         App: createBottomTabNavigator(
           {
             Dashboard,
-            New: {
-              screen: createStackNavigator(
-                {
-                  SelectProvider,
-                  SelectDateTime,
-                  Confirm,
-                },
-                {
-                  defaultNavigationOptions: {
-                    headerTransparent: true,
-                    headerTintColor: '#fff',
-                    headerLeftContainerStyle: {
-                      marginLeft: 20,
-                    },
-                  },
-                }
-              ),
-              navigationOptions: {
-                tabBarVisible: false,
-                tabBarLabel: 'Agendar',
-                tabBarIcon: (
-                  <Icon
-                    name='add-circle-outline'
-                    color='rgba(255, 255, 255, 0.6)'
-                    size={20}
-                  />
-                ),
-              },
-            },
+            Subscriptions,
             Profile,
           },
           {
@@ -80,7 +44,7 @@ export default (isSigned = false) =>
               activeTintColor: '#FFF',
               inactiveTintColor: 'rgba(255, 255, 255, 0.6)',
               style: {
-                backgroundColor: '#8d41a8',
+                backgroundColor: '#2B1A2F',
               },
             },
           }

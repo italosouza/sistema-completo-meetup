@@ -12,23 +12,34 @@ import Event from '~/components/Event'
 import { Container, List } from './styles'
 import api from '~/services/api'
 
-function Dashboard({ isFocused }) {
+function Subscriptions({ isFocused }) {
   const [meetups, setMeetups] = useState([])
   const [refreshing, setRefreshing] = useState(false)
-  const [date] = useState(new Date())
-  // const [page, setPage] = useState(0)
 
   async function loadMeetups(refresh = false) {
     try {
       setRefreshing(true)
       const curPage = refresh ? 0 : 1
-      const response = await api.get('/meetups', {
+      const response = await api.get('/subscriptions', {
         params: {
           page: curPage,
         },
       })
 
-      setMeetups(response.data)
+      const data = response.data.map(item => {
+        return {
+          id: item.Meetup.id,
+          past: item.Meetup.past,
+          title: item.Meetup.title,
+          location: item.Meetup.location,
+          date: item.Meetup.date,
+          User: {
+            name: '',
+          },
+        }
+      })
+
+      setMeetups(data)
     } catch (err) {
       Alert.alert('Aviso', 'Não foi possível carregar os dados.')
     } finally {
@@ -38,9 +49,9 @@ function Dashboard({ isFocused }) {
 
   useEffect(() => {
     loadMeetups()
-  }, [date, isFocused])
+  }, [isFocused])
 
-  async function handleSubscribe(id) {
+  async function handleCancel(id) {
     try {
       setRefreshing(true)
 
@@ -62,8 +73,6 @@ function Dashboard({ isFocused }) {
   return (
     <Background>
       <Container>
-        {/* <DateInput date={date} onChange={setDate} /> */}
-
         <List
           data={meetups}
           onRefresh={() => refreshList()}
@@ -72,7 +81,7 @@ function Dashboard({ isFocused }) {
           onEndReached={() => loadMeetups()}
           keyExtractor={item => String(item.id)}
           renderItem={({ item }) => (
-            <Event onSubscribe={handleSubscribe} data={item} />
+            <Event onCancel={handleCancel} data={item} />
           )}
         />
       </Container>
@@ -80,21 +89,21 @@ function Dashboard({ isFocused }) {
   )
 }
 
-Dashboard.propTypes = {
+Subscriptions.propTypes = {
   isFocused: PropTypes.bool.isRequired,
 }
 
 function barIcon({ tintColor }) {
-  return <Icon name='event' size={20} color={tintColor} />
+  return <Icon name='add' size={20} color={tintColor} />
 }
 
 barIcon.propTypes = {
   tintColor: PropTypes.string.isRequired,
 }
 
-Dashboard.navigationOptions = {
-  tabBarLabel: 'Meetups',
+Subscriptions.navigationOptions = {
+  tabBarLabel: 'Inscrições',
   tabBarIcon: barIcon,
 }
 
-export default withNavigationFocus(Dashboard)
+export default withNavigationFocus(Subscriptions)

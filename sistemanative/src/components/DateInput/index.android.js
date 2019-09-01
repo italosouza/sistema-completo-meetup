@@ -14,7 +14,6 @@ export default function DateInput({ date, onChange }) {
   )
 
   async function handleOpenPicker() {
-    console.tron.log('clicou pra abrir')
     const { action, year, month, day } = await DatePickerAndroid.open({
       mode: 'spinner',
       date,

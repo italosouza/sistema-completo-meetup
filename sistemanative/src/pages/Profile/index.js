@@ -121,9 +121,9 @@ export default function Profile() {
             onChangeText={setConfirmPassword}
           />
           <SubmitButton onPress={handleSubmit} loading={loading}>
-            Atualizar perfil
+            Salvar perfil
           </SubmitButton>
-          <LogoutButton onPress={handleLogout}>Sair</LogoutButton>
+          <LogoutButton onPress={handleLogout}>Sair do Meetapp</LogoutButton>
         </Form>
       </Container>
     </Background>
