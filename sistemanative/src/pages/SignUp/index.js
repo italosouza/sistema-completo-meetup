@@ -41,7 +41,6 @@ export default function SignUp({ navigation }) {
 
         <Form>
           <FormInput
-            icon='person-outline'
             keyboardType='email-address'
             autoCorrect={false}
             placeholder='Nome completo'
@@ -51,7 +50,6 @@ export default function SignUp({ navigation }) {
             onChangeText={setName}
           />
           <FormInput
-            icon='mail-outline'
             keyboardType='email-address'
             autoCorrect={false}
             autoCapitalize='none'
@@ -64,7 +62,6 @@ export default function SignUp({ navigation }) {
           />
 
           <FormInput
-            icon='lock-outline'
             secureTextEntry
             placeholder='Sua senha secreta'
             ref={passwordRef}
@@ -79,7 +76,7 @@ export default function SignUp({ navigation }) {
         </Form>
 
         <SignLink onPress={() => navigation.navigate('SignIn')}>
-          <SignLinkText>Já tenho conta</SignLinkText>
+          <SignLinkText>Já tenho login</SignLinkText>
         </SignLink>
       </Container>
     </Background>

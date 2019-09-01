@@ -24,7 +24,6 @@ export function* signIn({ payload }) {
     }
 
     yield put(signInSuccess(token, user))
-    // history.push('/dashboard')
   } catch (err) {
     Alert.alert('Falha no login', 'Dados de autenticação estão incorretos.')
     yield put(signFailure())
@@ -41,8 +40,10 @@ export function* signUp({ payload }) {
     })
 
     yield put(signUpSuccess())
-
-    // history.push('/')
+    Alert.alert(
+      'Cadastro com sucesso',
+      'Voce já pode fazer o login na aplicação'
+    )
   } catch (err) {
     Alert.alert(
       'Falha no cadastro',

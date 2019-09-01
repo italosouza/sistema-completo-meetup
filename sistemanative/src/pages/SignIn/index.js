@@ -36,7 +36,6 @@ export default function SignIn({ navigation }) {
         <Image source={logo} />
         <Form>
           <FormInput
-            icon='mail-outline'
             keyboardType='email-address'
             autoCorrect={false}
             autoCapitalize='none'
@@ -48,7 +47,6 @@ export default function SignIn({ navigation }) {
           />
 
           <FormInput
-            icon='lock-outline'
             secureTextEntry
             placeholder='Sua senha secreta'
             ref={passwordRef}
@@ -63,7 +61,7 @@ export default function SignIn({ navigation }) {
         </Form>
 
         <SignLink onPress={() => navigation.navigate('SignUp')}>
-          <SignLinkText>Criar conta gratuita</SignLinkText>
+          <SignLinkText>Criar conta grátis</SignLinkText>
         </SignLink>
       </Container>
     </Background>
